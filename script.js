@@ -325,7 +325,9 @@ function loadDashboard() {
   const cardDisplay = document.getElementById("card-display")
   const availableLimit = document.getElementById("available-limit")
   const usedLimit = document.getElementById("used-limit")
-  const purchaseHistory = document.getElementById("purchase-history")
+  const activeLoansCount = document.getElementById("active-loans")
+  const totalEmiLeft = document.getElementById("total-emi-left")
+  const activeLoansContainer = document.getElementById("active-loans-container")
 
   // User info
   userInfo.innerHTML = `
@@ -350,31 +352,149 @@ function loadDashboard() {
         </div>
     `
 
+  // Calculate EMI statistics
+  const activeLoans = userPurchases.filter((p) => p.status === "active")
+  const totalEmiRemaining = activeLoans.reduce((sum, loan) => {
+    const paidInstallments = loan.paidInstallments || 0
+    const remainingInstallments = loan.emiMonths - paidInstallments
+    return sum + loan.emiAmount * remainingInstallments
+  }, 0)
+
+  // Update individual stat cards
   availableLimit.textContent = `₹${available.toLocaleString()}`
   usedLimit.textContent = `₹${totalUsed.toLocaleString()}`
+  activeLoansCount.textContent = activeLoans.length
+  totalEmiLeft.textContent = `₹${totalEmiRemaining.toLocaleString()}`
 
-  // Purchase history
-  if (userPurchases.length > 0) {
-    purchaseHistory.innerHTML = userPurchases
-      .map(
-        (purchase) => `
-            <div class="purchase-item">
-                <div class="purchase-header">
-                    <strong>${purchase.productName}</strong>
-                    <span class="purchase-amount">₹${purchase.amount.toLocaleString()}</span>
-                </div>
-                <div class="purchase-details">
-                    <small>EMI: ₹${purchase.emiAmount}/month for ${purchase.emiMonths} months</small>
-                    <small>Date: ${new Date(purchase.date).toLocaleDateString()}</small>
-                </div>
-            </div>
-        `,
-      )
-      .join("")
-  } else {
-    purchaseHistory.innerHTML =
-      '<p class="no-data">No purchases yet. <a href="#" data-page="products">Browse products</a></p>'
+  // Load active loans
+  loadActiveLoans(activeLoans)
+}
+
+function loadActiveLoans(activeLoans) {
+  const container = document.getElementById("active-loans-container")
+
+  if (activeLoans.length === 0) {
+    container.innerHTML = '<p class="no-data">No active loans. <a href="#" data-page="products">Browse products</a></p>'
+    return
   }
+
+  container.innerHTML = activeLoans
+    .map((loan) => {
+      // Initialize loan data if not exists
+      if (!loan.paidInstallments) loan.paidInstallments = Math.floor(Math.random() * (loan.emiMonths / 2)) + 1
+      if (!loan.startDate) loan.startDate = new Date(loan.date)
+
+      const paidInstallments = loan.paidInstallments
+      const totalInstallments = loan.emiMonths
+      const remainingInstallments = totalInstallments - paidInstallments
+      const progressPercentage = Math.round((paidInstallments / totalInstallments) * 100)
+
+      // Calculate next EMI date
+      const nextEmiDate = new Date(loan.startDate)
+      nextEmiDate.setMonth(nextEmiDate.getMonth() + paidInstallments + 1)
+
+      // Generate EMI timeline
+      const emiTimeline = generateEmiTimeline(loan, paidInstallments, totalInstallments)
+
+      return `
+      <div class="loan-card">
+        <div class="loan-header">
+          <div class="loan-info">
+            <h4>${loan.productName}</h4>
+            <p>Loan started on ${new Date(loan.startDate).toLocaleDateString()}</p>
+          </div>
+          <div class="loan-amount">
+            <span class="total-amount">₹${loan.amount.toLocaleString()}</span>
+            <span class="emi-amount">₹${loan.emiAmount}/month</span>
+          </div>
+        </div>
+        
+        <div class="loan-progress">
+          <div class="progress-header">
+            <span class="progress-text">${paidInstallments} of ${totalInstallments} EMIs paid</span>
+            <span class="progress-percentage">${progressPercentage}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+          </div>
+        </div>
+        
+        <div class="emi-timeline">
+          ${emiTimeline}
+        </div>
+        
+        <div class="loan-details">
+          <div class="detail-item">
+            <span class="detail-value">₹${(loan.emiAmount * remainingInstallments).toLocaleString()}</span>
+            <span class="detail-label">Amount Left</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-value">${remainingInstallments}</span>
+            <span class="detail-label">EMIs Left</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-value">₹${(loan.emiAmount * paidInstallments).toLocaleString()}</span>
+            <span class="detail-label">Paid Amount</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-value">${Math.ceil(remainingInstallments / 12)}y ${remainingInstallments % 12}m</span>
+            <span class="detail-label">Time Left</span>
+          </div>
+        </div>
+        
+        ${
+          remainingInstallments > 0
+            ? `
+          <div class="next-emi-date">
+            <span class="date">${nextEmiDate.toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}</span>
+            <span class="label">Next EMI Due Date</span>
+          </div>
+        `
+            : ""
+        }
+      </div>
+    `
+    })
+    .join("")
+}
+
+function generateEmiTimeline(loan, paidInstallments, totalInstallments) {
+  let timeline = ""
+  const currentDate = new Date()
+  const startDate = new Date(loan.startDate)
+
+  for (let i = 1; i <= totalInstallments; i++) {
+    const emiDate = new Date(startDate)
+    emiDate.setMonth(emiDate.getMonth() + i)
+
+    let status = "pending"
+    let tooltip = `EMI ${i}: ${emiDate.toLocaleDateString("en-IN", { month: "short", year: "numeric" })}`
+
+    if (i <= paidInstallments) {
+      status = "paid"
+      tooltip += " - Paid ✓"
+    } else if (i === paidInstallments + 1) {
+      status = "current"
+      tooltip += " - Due Now"
+    } else if (emiDate < currentDate) {
+      status = "overdue"
+      tooltip += " - Overdue!"
+    } else {
+      tooltip += " - Pending"
+    }
+
+    timeline += `
+      <div class="emi-installment ${status}" data-tooltip="${tooltip}">
+        ${i}
+      </div>
+    `
+  }
+
+  return timeline
 }
 
 function renderProducts() {
@@ -511,7 +631,7 @@ function purchaseProduct() {
     return
   }
 
-  // Create purchase record
+  // Create purchase record with loan tracking
   const purchase = {
     id: Date.now(),
     userId: currentUser.id,
@@ -521,7 +641,9 @@ function purchaseProduct() {
     emiAmount: monthlyEMI,
     emiMonths: months,
     date: new Date().toISOString(),
+    startDate: new Date().toISOString(),
     status: "active",
+    paidInstallments: 0,
   }
 
   purchases.push(purchase)
