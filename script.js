@@ -13,7 +13,7 @@ const sampleProducts = [
     name: "iPhone 15 Pro",
     brand: "apple",
     price: 134900,
-    image: "📱",
+    image: "./assets/iphone15.jpg",
     specs: {
       Display: "6.1-inch Super Retina XDR",
       Processor: "A17 Pro chip",
@@ -27,7 +27,7 @@ const sampleProducts = [
     name: "Samsung Galaxy S24 Ultra",
     brand: "samsung",
     price: 129999,
-    image: "📱",
+    image: "./assets/samsung-s24.jpg",
     specs: {
       Display: "6.8-inch Dynamic AMOLED 2X",
       Processor: "Snapdragon 8 Gen 3",
@@ -41,7 +41,7 @@ const sampleProducts = [
     name: "OnePlus 12",
     brand: "oneplus",
     price: 64999,
-    image: "📱",
+    image: "./assets/oneplus12.jpg",
     specs: {
       Display: "6.82-inch LTPO AMOLED",
       Processor: "Snapdragon 8 Gen 3",
@@ -55,7 +55,7 @@ const sampleProducts = [
     name: "Xiaomi 14 Ultra",
     brand: "xiaomi",
     price: 99999,
-    image: "📱",
+    image: "./assets/xiaomi.jpg",
     specs: {
       Display: "6.73-inch LTPO AMOLED",
       Processor: "Snapdragon 8 Gen 3",
@@ -69,7 +69,7 @@ const sampleProducts = [
     name: "iPhone 14",
     brand: "apple",
     price: 79900,
-    image: "📱",
+    image: "./assets/iphone14.jpg",
     specs: {
       Display: "6.1-inch Super Retina XDR",
       Processor: "A15 Bionic chip",
@@ -83,7 +83,7 @@ const sampleProducts = [
     name: "Samsung Galaxy A54",
     brand: "samsung",
     price: 38999,
-    image: "📱",
+    image: "./assets/samsunga24.jpg",
     specs: {
       Display: "6.4-inch Super AMOLED",
       Processor: "Exynos 1380",
@@ -523,7 +523,7 @@ function renderProducts() {
     .map(
       (product) => `
         <div class="product-card">
-            <div class="product-image">${product.image}</div>
+            <img src="${product.image}" class="product-image" />
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <div class="product-price">₹${product.price.toLocaleString()}</div>
@@ -549,7 +549,7 @@ function showProductInfo(productId) {
   const container = document.getElementById("product-info-container")
   container.innerHTML = `
         <div class="product-detail">
-            <div class="product-detail-image">${product.image}</div>
+            <img src=${product.image} class="product-detail-image"/>
             <div class="product-detail-info">
                 <h1>${product.name}</h1>
                 <div class="product-detail-price">₹${product.price.toLocaleString()}</div>

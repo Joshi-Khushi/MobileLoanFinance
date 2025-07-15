@@ -1426,6 +1426,8 @@
   
   .product-image {
     height: 200px;
+    width:100%;
+    object-fit: cover;
     background: var(--dark-bg);
     display: flex;
     align-items: center;
