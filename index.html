@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoanEase - Zero Cost EMI Mobile Financing</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>LoanEase</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="products">Products</a>
+                </li>
+                <li class="nav-item" id="dashboard-nav" style="display: none;">
+                    <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-nav" style="display: none;">
+                    <a href="#" class="nav-link" data-page="admin">Admin</a>
+                </li>
+                <li class="nav-item" id="login-nav">
+                    <a href="#" class="nav-link" data-page="login">Login</a>
+                </li>
+                <li class="nav-item" id="register-nav">
+                    <a href="#" class="nav-link btn-primary" data-page="register">Register</a>
+                </li>
+                <li class="nav-item" id="logout-nav" style="display: none;">
+                    <a href="#" class="nav-link" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>India's #1 Mobile Financing Platform</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Get Your 
+                <span class="dream-text">Dream Mobile</span>
+                on 
+                <span class="highlight-wrapper">
+                    <span class="highlight">Zero Cost EMI</span>
+                    <div class="highlight-underline"></div>
+                </span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                <i class="fas fa-check-circle"></i>
+                No credit card needed! 
+                <i class="fas fa-check-circle"></i>
+                Get instant approval with our Gold & Titanium EMI cards
+                <i class="fas fa-check-circle"></i>
+                Start shopping in minutes
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">₹1.5L</div>
+                    <div class="stat-label">Max Credit Limit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2 Min</div>
+                    <div class="stat-label">Instant Approval</div>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large" data-page="register">
+                    <i class="fas fa-credit-card"></i>
+                    Get EMI Card Now
+                    <span class="btn-shine"></span>
+                </button>
+                <button class="btn btn-secondary btn-large" data-page="products">
+                    <i class="fas fa-mobile-alt"></i>
+                    Browse Mobiles
+                </button>
+            </div>
+            
+            <div class="hero-features">
+                <div class="feature-pill">
+                    <i class="fas fa-shield-alt"></i>
+                    100% Secure
+                </div>
+                <div class="feature-pill">
+                    <i class="fas fa-clock"></i>
+                    Instant Process
+                </div>
+                <div class="feature-pill">
+                    <i class="fas fa-percentage"></i>
+                    0% Interest
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="app-interface">
+                        <div class="app-header">
+                            <div class="app-logo">📱</div>
+                            <div class="app-title">LoanEase</div>
+                        </div>
+                        <div class="emi-card-preview">
+                            <div class="card-chip"></div>
+                            <div class="card-number">**** **** **** 1234</div>
+                            <div class="card-holder">JOHN DOE</div>
+                            <div class="card-limit">₹50,000 LIMIT</div>
+                        </div>
+                        <div class="quick-stats">
+                            <div class="stat">Available: ₹45,000</div>
+                            <div class="stat">Used: ₹5,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="floating-elements">
+                <div class="floating-icon" style="--delay: 0s; --duration: 3s;">💳</div>
+                <div class="floating-icon" style="--delay: 1s; --duration: 4s;">📱</div>
+                <div class="floating-icon" style="--delay: 2s; --duration: 3.5s;">✨</div>
+                <div class="floating-icon" style="--delay: 0.5s; --duration: 4.5s;">💰</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hero-background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+</section>
+
+            <section class="features">
+                <div class="container">
+                    <h2>Why Choose LoanEase?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-credit-card"></i>
+                            <h3>No Credit Card Required</h3>
+                            <p>Get instant financing without any credit card dependency</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-percentage"></i>
+                            <h3>Zero Cost EMI</h3>
+                            <p>Pay the exact MRP with no additional charges or interest</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Instant Approval</h3>
+                            <p>Get approved in minutes with minimal documentation</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure & Safe</h3>
+                            <p>Bank-grade security for all your transactions</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="emi-cards">
+                <div class="container">
+                    <h2>Choose Your EMI Card</h2>
+                    <div class="cards-grid">
+                        <div class="emi-card gold">
+                            <div class="card-header">
+                                <i class="fas fa-star"></i>
+                                <h3>Gold Card</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="limit">₹50,000</div>
+                                <p>Credit Limit</p>
+                                <ul>
+                                    <li>3-12 months EMI</li>
+                                    <li>Basic mobiles</li>
+                                    <li>Quick approval</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="emi-card titanium">
+                            <div class="card-header">
+                                <i class="fas fa-crown"></i>
+                                <h3>Titanium Card</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="limit">₹1,50,000</div>
+                                <p>Credit Limit</p>
+                                <ul>
+                                    <li>3-24 months EMI</li>
+                                    <li>Premium mobiles</li>
+                                    <li>Priority support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Register Page -->
+        <div id="register-page" class="page">
+            <div class="form-container">
+                <div class="form-card">
+                    <h2>Register for EMI Card</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardType">EMI Card Type</label>
+                            <select id="cardType" name="cardType" required>
+                                <option value="">Select Card Type</option>
+                                <option value="gold">Gold Card (₹50,000 limit)</option>
+                                <option value="titanium">Titanium Card (₹1,50,000 limit)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="aadhar">Aadhar Number</label>
+                            <input type="text" id="aadhar" name="aadhar" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pan">PAN Number</label>
+                            <input type="text" id="pan" name="pan" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income">Monthly Income</label>
+                            <input type="number" id="income" name="income" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="form-container">
+                <div class="form-card">
+                    <h2>Login</h2>
+                    <div class="login-tabs">
+                        <button class="tab-btn active" data-tab="user">User Login</button>
+                        <button class="tab-btn" data-tab="admin">Admin Login</button>
+                    </div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <p class="form-footer">
+                        Don't have an account? <a href="#" data-page="register">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2>My Dashboard</h2>
+                    <div class="user-info" id="user-info"></div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>My EMI Card</h3>
+                        <div id="user-card-info">
+                            <div class="card-display" id="card-display"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-value" id="available-limit">₹0</span>
+                                <span class="stat-label">Available Limit</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="used-limit">₹0</span>
+                                <span class="stat-label">Used Limit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Purchase History</h3>
+                    <div id="purchase-history">
+                        <p class="no-data">No purchases yet. <a href="#" data-page="products">Browse products</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Page -->
+        <div id="products-page" class="page">
+            <div class="products-container">
+                <div class="products-header">
+                    <h2>Mobile Phones</h2>
+                    <div class="filters">
+                        <select id="brand-filter">
+                            <option value="">All Brands</option>
+                            <option value="apple">Apple</option>
+                            <option value="samsung">Samsung</option>
+                            <option value="oneplus">OnePlus</option>
+                            <option value="xiaomi">Xiaomi</option>
+                        </select>
+                        <select id="price-filter">
+                            <option value="">All Prices</option>
+                            <option value="0-20000">Under ₹20,000</option>
+                            <option value="20000-50000">₹20,000 - ₹50,000</option>
+                            <option value="50000-100000">₹50,000 - ₹1,00,000</option>
+                            <option value="100000+">Above ₹1,00,000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid" id="products-grid"></div>
+            </div>
+        </div>
+
+        <!-- Product Info Page -->
+        <div id="product-info-page" class="page">
+            <div class="product-info-container" id="product-info-container">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-page" class="page">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h2>Admin Panel</h2>
+                </div>
+                
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="applications">Applications</button>
+                    <button class="tab-btn" data-tab="users">Users</button>
+                    <button class="tab-btn" data-tab="products">Products</button>
+                </div>
+
+                <div class="admin-content">
+                    <div id="applications-tab" class="tab-content active">
+                        <h3>Pending Applications</h3>
+                        <div id="pending-applications"></div>
+                    </div>
+                    
+                    <div id="users-tab" class="tab-content">
+                        <h3>Registered Users</h3>
+                        <div id="users-list"></div>
+                    </div>
+                    
+                    <div id="products-tab" class="tab-content">
+                        <h3>Product Management</h3>
+                        <button class="btn btn-primary" onclick="addProduct()">Add New Product</button>
+                        <div id="admin-products-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- EMI Calculator Modal -->
+    <div id="emi-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>EMI Calculator</h3>
+            <div id="emi-calculator">
+                <div class="form-group">
+                    <label>Product Price: ₹<span id="product-price"></span></label>
+                </div>
+                <div class="form-group">
+                    <label for="emi-months">EMI Duration (months)</label>
+                    <select id="emi-months">
+                        <option value="3">3 months</option>
+                        <option value="6">6 months</option>
+                        <option value="9">9 months</option>
+                        <option value="12">12 months</option>
+                        <option value="18">18 months</option>
+                        <option value="24">24 months</option>
+                    </select>
+                </div>
+                <div class="emi-result">
+                    <p>Monthly EMI: ₹<span id="monthly-emi">0</span></p>
+                    <p>Total Amount: ₹<span id="total-amount">0</span></p>
+                </div>
+                <button class="btn btn-primary" onclick="purchaseProduct()">Purchase Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
